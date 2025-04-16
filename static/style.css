@@ -1,0 +1,118 @@
+/* ... existing CSS ... */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; /* Remove default body margin */
+    background-color: #f8f9fa; /* Light gray background */
+    color: #495057; /* Dark gray text */
+    line-height: 1.6;
+}
+
+header {
+    background-color: #343a40; /* Dark background */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #007bff; /* Highlight on hover */
+}
+
+main {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin: 2rem auto;
+    max-width: 960px; /* Limit width for better readability */
+}
+
+h2 {
+    color: #28a745; /* Green heading */
+    border-bottom: 0.1rem solid #28a745;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0;
+}
+
+.course-list li {
+    background-color: #e9ecef; /* Light gray course boxes */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.course-list li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.course-list li a {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.resource-list li {
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 0;
+}
+
+.question-list li {
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 0;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+}

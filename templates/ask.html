@@ -1,0 +1,50 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 1 
+<title>{{ app_name }} - Ask a Question</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+<h1>{{ app_name }}</h1>
+<nav>
+<ul>
+<li><a href="{{ url_for('index') }}">Courses</a></li>
+<li><a href="{{ url_for('information') }}">Information</a></li>
+<li><a href="{{ url_for('profile') }}">User Profile</a></li>
+<li><a href="{{ url_for('all_questions') }}">All Questions</a></li>
+<li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<h2>Ask a New Question</h2>
+<form method="POST">
+<div>
+<label for="course_name">Course:</label>
+<select id="course_name" name="course_name" required>
+<option value="">-- Select a Course --</option>
+{% for course in courses %}
+<option value="{{ course }}">{{ course }}</option>
+{% endfor %}
+</select>
+</div>
+<div>
+<label for="question_title">Question Title:</label>
+<input type="text" id="question_title" name="question_title" required>
+</div>
+<div>
+<label for="question_content">Question Content:</label>
+<textarea id="question_content" name="question_content" rows="5" required></textarea>
+</div>
+<button type="submit" class="button">Submit Question</button>
+</form>
+<p><a href="{{ url_for('all_questions') }}">Back to All Questions</a></p>
+</main>
+<footer>
+<p>&copy; {{ year }} {{ app_name }}</p>
+</footer>
+</body>
+</html>

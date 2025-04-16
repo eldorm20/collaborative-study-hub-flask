@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <li><a href="{{ url_for('profile') }}">User Profile</a></li>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - {{ course_name }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ app_name }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Courses</a></li>
+                <li><a href="#">Information</a></li>
+                <li><a href="#">User Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="course-dashboard">
+        <h2>{{ course_name }} - Learning Resources & Q&A</h2>
+
+        <section class="resources-section">
+            <h3>Resources <a href="{{ url_for('upload_resource', course_name=course_name) }}" class="button small">Upload Resource</a></h3>
+            {% if resources %}
+            <ul class="resource-list">
+                {% for resource in resources %}
+                <li>
+                    <a href="{{ resource.file_url }}" target="_blank">{{ resource.title }}</a>
+                    <p class="resource-info">Uploaded by: {{ resource.uploaded_by }}, on: {{ resource.upload_date }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No resources available for this course yet. <a href="{{ url_for('upload_resource', course_name=course_name) }}">Be the first to share!</a></p>
+            {% endif %}
+        </section>
+
+        <section class="questions-section">
+            <h3>Questions <a href="{{ url_for('ask_question', course_name=course_name) }}" class="button small">Ask Question</a></h3>
+            {% if questions %}
+            <ul class="question-list">
+                {% for question in questions %}
+                <li>
+                    <a href="#">{{ question.title }}</a>
+                    <p class="resource-info">Asked by: {{ question.asked_by }}, on: {{ question.ask_date }}</p>
+                </li>
+                {% endfor %}  {# Close the 'for' loop #}
+            </ul>
+            {% else %}
+            <p>No questions asked yet. <a href="{{ url_for('ask_question', course_name=course_name) }}">Start the discussion!</a></p>
+            {% endif %}
+        </section>
+        <p><a href="{{ url_for('index') }}">Back to Course List</a></p>
+    </main>
+    <footer>
+        <p>&copy; {{ year }} {{ app_name }}</p>
+    </footer>
+</body>
+</html>

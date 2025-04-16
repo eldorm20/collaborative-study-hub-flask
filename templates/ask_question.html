@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }} - Upload Resource for {{ course_name }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ app_name }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Courses</a></li>
+                <li><a href="{{ url_for('information') }}">Information</a></li>
+                <li><a href="{{ url_for('profile') }}">User Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Upload New Resource for {{ course_name }}</h2>
+        <form method="POST">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="file_url">File URL:</label>
+                <input type="text" id="file_url" name="file_url" placeholder="e.g., https://example.com/document.pdf" required>
+                <small>For this basic version, please provide a direct URL to the resource.</small>
+            </div>
+            <button type="submit" class="button">Upload Resource</button>
+        </form>
+        <p><a href="{{ url_for('course_dashboard', course_name=course_name) }}">Back to {{ course_name }} Dashboard</a></p>
+    </main>
+    <footer>
+        <p>&copy; {{ year }} {{ app_name }}</p>
+    </footer>
+</body>
+</html>
