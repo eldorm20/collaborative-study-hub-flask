@@ -62,15 +62,30 @@ Provide step-by-step instructions on how to install the necessary dependencies.
 
 ## Setup
 
-Explain any specific setup steps required for your application.
-
 ### Database Setup
 
-If your application uses a database (like SQLite, which might be the simplest for a basic project), explain how it's initialized.
+This application uses a PostgreSQL database. To set it up, follow these steps:
 
-* **(For SQLite):** Mention that Flask-SQLAlchemy (if you're using it) or your database interaction code will likely create the database file (e.g., `site.db`) automatically in the project directory upon the first run.
-* **(For other databases):** Provide instructions on how to set up the database server, create the database, and configure any necessary connection details.
+1.  **Install PostgreSQL:** If you don't have PostgreSQL installed, you'll need to download and install it for your operating system. You can find instructions on the official PostgreSQL website: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
-### Environment Variables (Optional)
+2.  **Create the Database:** Once PostgreSQL is installed and running, you need to create the database that this application will use. You can do this using the `psql` command-line tool or a graphical administration tool like pgAdmin.
 
-If your application uses environment variables for configuration (e.g., database URLs, API keys), explain how to create and set them (e.g., using a `.env` file and a library like `python-dotenv`).
+    ```bash
+    sudo -u postgres psql
+    CREATE DATABASE your_database_name;
+    \q
+    ```
+
+    *(Replace `your_database_name` with your desired database name, e.g., `study_hub_db`.)*
+
+3.  **Install the PostgreSQL Adapter:** You'll need a Python library to connect to PostgreSQL. Install `psycopg2`:
+
+    ```bash
+    pip install psycopg2-binary
+    ```
+
+4.  **Configure Database Connection:** The connection details for your PostgreSQL database will be specified using an environment variable (see the next section).
+
+### Environment Variables
+
+This application relies on environment variables for configuration, including the database connection details. You should create a `.env` file in the root of the project and define the following variables:
