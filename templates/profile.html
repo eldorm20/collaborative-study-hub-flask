@@ -4,32 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app_name }} - User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>{{ app_name }}</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Courses</a></li>
-                <li><a href="{{ url_for('information') }}">Information</a></li>
-                <li><a href="{{ url_for('profile') }}" class="active">User Profile</a></li>
-            </ul>
-        </nav>
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <nav class="mt-2">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('index') }}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('information') }}">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-primary" href="{{ url_for('profile') }}">User Profile</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
+    <main class="container mt-4">
         <h2>User Profile</h2>
-        <p>This is your profile page. Once user authentication is implemented, you will be able to see your information and contributions here.</p>
+        <p class="text-muted">This is your profile page. Once user authentication is implemented, you will be able to see your information and contributions here.</p>
 
-        <h3>Your Contributions (Placeholder):</h3>
-        <ul>
-            <li>Uploaded Resources: 0</li>
-            <li>Asked Questions: 0</li>
-            <li>Answers Given: 0</li>
-        </ul>
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                Your Contributions
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>Uploaded Resources:</strong> <span class="text-muted">0</span></li>
+                    <li><strong>Asked Questions:</strong> <span class="text-muted">0</span></li>
+                    <li><strong>Answers Given:</strong> <span class="text-muted">0</span></li>
+                </ul>
+            </div>
+        </div>
     </main>
-    <footer>
-        <p>&copy; {{ year }} {{ app_name }}</p>
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p>&copy; {{ year }} {{ app_name }}</p>
+        </div>
     </footer>
 </body>
 </html>

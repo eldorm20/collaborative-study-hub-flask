@@ -4,45 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app_name }} - Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>{{ app_name }}</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Courses</a></li>
-                <li><a href="{{ url_for('information') }}" class="active">Information</a></li>
-                <li><a href="{{ url_for('profile') }}">User Profile</a></li>
-            </ul>
-        </nav>
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <nav class="mt-2">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('index') }}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-primary" href="{{ url_for('information') }}">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('profile') }}">User Profile</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
+    <main class="container mt-4">
         <h2>About {{ app_name }}</h2>
-        <p>Welcome to the Collaborative Study Hub! This platform is designed to be a central place for students to share and access learning resources for their courses.</p>
+        <p class="lead">Welcome to the Collaborative Study Hub! This platform is designed to be a central place for students to share and access learning resources for their courses.</p>
         <p>Our aim is to foster a community of learners who support each other by providing notes, summaries, links to helpful materials, and a space to ask and answer questions.</p>
 
-        <h3>How it Works:</h3>
-        <ul>
-            <li><strong>Browse Courses:</strong> On the homepage, you'll find a list of available courses based on the resources that have been uploaded.</li>
-            <li><strong>Course Dashboard:</strong> Clicking on a course will take you to its dedicated dashboard, where you can find a list of shared resources and recent questions.</li>
-            <li><strong>Share Resources:</strong> If you have helpful study materials, you can upload them to the relevant course page.</li>
-            <li><strong>Ask Questions:</strong> If you're stuck on a topic, feel free to ask your questions in the course's Q&A section.</li>
-            <li><strong>Help Others:</strong> If you know the answer to a question, please contribute by sharing your knowledge.</li>
-            <li><strong>User Profiles:</strong> (Coming Soon) In the future, you'll be able to see your contributions and manage your profile.</li>
-        </ul>
+        <section class="mb-4">
+            <h3>How it Works:</h3>
+            <ul class="list-unstyled">
+                <li><strong>Browse Courses:</strong> On the homepage, you'll find a list of available courses based on the resources that have been uploaded.</li>
+                <li><strong>Course Dashboard:</strong> Clicking on a course will take you to its dedicated dashboard, where you can find a list of shared resources and recent questions.</li>
+                <li><strong>Share Resources:</strong> If you have helpful study materials, you can upload them to the relevant course page.</li>
+                <li><strong>Ask Questions:</strong> If you're stuck on a topic, feel free to ask your questions in the course's Q&A section.</li>
+                <li><strong>Help Others:</strong> If you know the answer to a question, please contribute by sharing your knowledge.</li>
+                <li><strong>User Profiles:</strong> <span class="text-muted">(Coming Soon)</span> In the future, you'll be able to see your contributions and manage your profile.</li>
+            </ul>
+        </section>
 
-        <h3>Our Goals:</h3>
-        <ul>
-            <li>To create a free and accessible repository of study materials.</li>
-            <li>To facilitate peer-to-peer learning and support.</li>
-            <li>To make studying more efficient and collaborative.</li>
-        </ul>
+        <section class="mb-4">
+            <h3>Our Goals:</h3>
+            <ul class="list-unstyled">
+                <li>To create a free and accessible repository of study materials.</li>
+                <li>To facilitate peer-to-peer learning and support.</li>
+                <li>To make studying more efficient and collaborative.</li>
+            </ul>
+        </section>
 
-        <p>Thank you for being a part of the Collaborative Study Hub!</p>
+        <p class="text-muted">Thank you for being a part of the Collaborative Study Hub!</p>
     </main>
-    <footer>
-        <p>&copy; {{ year }} {{ app_name }}</p>
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p>&copy; {{ year }} {{ app_name }}</p>
+        </div>
     </footer>
 </body>
 </html>

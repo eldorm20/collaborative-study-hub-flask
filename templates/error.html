@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <li><a href="{{ url_for('profile') }}">User Profile</a></li>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app_name }} - Error</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; background-color: #f8d7da; color: #721c24; padding: 15px; border: 1px solid #f5c6cb; border-radius: 5px; }
-        h1 { color: #721c24; }
-        p { margin-bottom: 10px; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ app_name }} - Error</h1>
-    <p>{{ message }}</p>
-    <p><a href="{{ url_for('index') }}">Go back to the homepage</a></p>
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <nav class="mt-2">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('index') }}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('information') }}">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('profile') }}">User Profile</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Oops! Something went wrong.</h1>
+            <p class="lead">{{ error }}</p>
+            <hr class="my-4">
+            <p>It seems there was an unexpected issue. Please try again or go back to the homepage.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{ url_for('index') }}" role="button">Back to Homepage</a>
+            </p>
+        </div>
+    </main>
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p>&copy; {{ year }} {{ app_name }}</p>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,41 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <li><a href="{{ url_for('profile') }}">User Profile</a></li>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ app_name }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>{{ app_name }}</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}" class="active">Courses</a></li>
-                <li><a href="#">Information</a></li>
-                <li><a href="#">User Profile</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>Available Courses</h2>
-        {% if courses %}
-        <ul class="course-list">
-            {% for course in courses %}
-            <li><a href="{{ url_for('course_dashboard', course_name=course) }}">{{ course }}</a></li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No courses available yet. Courses will be listed here once resources are uploaded.</p>
-        {% endif %}
-        <div class="call-to-action">
-            <p>Ready to contribute? <a href="#">Find your course and share resources!</a></p>
+{% extends 'base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid bg-secondary text-white text-center py-5 mb-4">
+        <div class="container">
+            <h1 class="display-4">Collaborate, Learn, and Grow Together</h1>
+            <p class="lead">Unlock your potential by connecting with peers, accessing curated resources, and engaging in focused study sessions.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg mr-2" href="#" role="button">Explore Courses</a>
+                <a class="btn btn-outline-light btn-lg" href="{{ url_for('register') }}" role="button">Sign Up</a>
+            </p>
         </div>
-    </main>
-    <footer>
-        <p>&copy; {{ year }} {{ app_name }}</p>
-    </footer>
-</body>
-</html>
+    </div>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2>Available Courses</h2>
+            {% if courses %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for course in courses %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course }}</h5>
+                            <p class="card-text">Dive into the world of {{ course }} with our curated resources and collaborative discussions.</p>
+                            <a href="{{ url_for('course_dashboard', course_name=course) }}" class="btn btn-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No courses available yet. Courses will be listed here once resources are uploaded.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="py-4 bg-info text-white text-center">
+        <div class="container">
+            <p class="lead mb-0">Ready to contribute and enhance your learning experience? <a href="#" class="text-light font-weight-bold">Find your course and share resources!</a></p>
+        </div>
+    </section>
+{% endblock %}

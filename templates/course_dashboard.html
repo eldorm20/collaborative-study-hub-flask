@@ -1,62 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <li><a href="{{ url_for('profile') }}">User Profile</a></li>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app_name }} - {{ course_name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .embed-responsive {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+        }
+        .embed-responsive::before {
+            display: block;
+            content: "";
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+        }
+        .embed-responsive .embed-responsive-item {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>{{ app_name }}</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Courses</a></li>
-                <li><a href="#">Information</a></li>
-                <li><a href="#">User Profile</a></li>
-            </ul>
-        </nav>
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <h1>{{ app_name }}</h1>
+            <nav class="mt-2">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('index') }}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ url_for('profile') }}">User Profile</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main class="course-dashboard">
-        <h2>{{ course_name }} - Learning Resources & Q&A</h2>
+    <main class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>{{ course_name }} - Learning Resources & Q&A</h2>
+            <div>
+                <a href="{{ url_for('upload_resource', course_name=course_name) }}" class="btn btn-primary btn-sm mr-2">Upload Resource</a>
+                <a href="{{ url_for('ask_question', course_name=course_name) }}" class="btn btn-info btn-sm">Ask Question</a>
+            </div>
+        </div>
 
-        <section class="resources-section">
-            <h3>Resources <a href="{{ url_for('upload_resource', course_name=course_name) }}" class="button small">Upload Resource</a></h3>
-            {% if resources %}
-            <ul class="resource-list">
-                {% for resource in resources %}
-                <li>
-                    <a href="{{ resource.file_url }}" target="_blank">{{ resource.title }}</a>
-                    <p class="resource-info">Uploaded by: {{ resource.uploaded_by }}, on: {{ resource.upload_date }}</p>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No resources available for this course yet. <a href="{{ url_for('upload_resource', course_name=course_name) }}">Be the first to share!</a></p>
-            {% endif %}
+        <section class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Resources
+            </div>
+            <div class="card-body">
+                {% if resources %}
+                <ul class="list-unstyled">
+                    {% for resource in resources %}
+                    <li class="media mb-3">
+                        <div class="media-body">
+                            {% if 'youtube.com/watch?v=' in resource.file_url %}
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ resource.file_url.split('v=')[1].split('&')[0] }}" allowfullscreen></iframe>
+                            </div>
+                            <h6 class="mt-2"><a href="{{ resource.file_url }}" target="_blank" class="font-weight-bold">{{ resource.title }}</a></h6>
+                            {% else %}
+                            <h6 class="mt-0"><a href="{{ resource.file_url }}" target="_blank" class="font-weight-bold">{{ resource.title }}</a></h6>
+                            {% endif %}
+                            <p class="text-muted small">Uploaded by: {{ resource.uploaded_by or 'Anonymous' }}, on: {{ resource.upload_date }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No resources available for this course yet. <a href="{{ url_for('upload_resource', course_name=course_name) }}">Be the first to share!</a></p>
+                {% endif %}
+            </div>
         </section>
 
-        <section class="questions-section">
-            <h3>Questions <a href="{{ url_for('ask_question', course_name=course_name) }}" class="button small">Ask Question</a></h3>
-            {% if questions %}
-            <ul class="question-list">
-                {% for question in questions %}
-                <li>
-                    <a href="#">{{ question.title }}</a>
-                    <p class="resource-info">Asked by: {{ question.asked_by }}, on: {{ question.ask_date }}</p>
-                </li>
-                {% endfor %}  {# Close the 'for' loop #}
-            </ul>
-            {% else %}
-            <p>No questions asked yet. <a href="{{ url_for('ask_question', course_name=course_name) }}">Start the discussion!</a></p>
-            {% endif %}
+        <section class="card mb-4">
+            <div class="card-header bg-info text-white">
+                Questions
+            </div>
+            <div class="card-body">
+                {% if questions %}
+                <ul class="list-unstyled">
+                    {% for question in questions %}
+                    <li class="media mb-2">
+                        <div class="media-body">
+                            <a href="#" class="font-weight-bold">{{ question.title }}</a>
+                            <p class="text-muted small">Asked by: {{ question.asked_by }}, on: {{ question.ask_date }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p class="mt-2"><a href="{{ url_for('ask_question', course_name=course_name) }}">Ask a new question</a></p>
+                {% else %}
+                <p>No questions asked yet. <a href="{{ url_for('ask_question', course_name=course_name) }}">Start the discussion!</a></p>
+                {% endif %}
+            </div>
         </section>
-        <p><a href="{{ url_for('index') }}">Back to Course List</a></p>
+
+        <p class="mt-3"><a href="{{ url_for('index') }}" class="btn btn-secondary btn-sm">Back to Course List</a></p>
     </main>
-    <footer>
-        <p>&copy; {{ year }} {{ app_name }}</p>
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <div class="container">
+            <p>&copy; {{ year }} {{ app_name }}</p>
+        </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
